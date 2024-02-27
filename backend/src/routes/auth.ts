@@ -37,14 +37,14 @@ router.post('/login',[
             return res.status(400).json({message:"Usuário ou senha inválida"})
         }
 
-        const token = jwt.sign({userid:user.id},process.env.JWT_SECRET_KEY as string,{
-            expiresIn:'10d',
+        const token = jwt.sign({userId:user.id},process.env.JWT_SECRET_KEY as string,{
+            expiresIn:'1d',
         }) 
 
         res.cookie('auth_token',token,{
             httpOnly:true,
             secure:process.env.NODE_ENV === "production",
-            maxAge:864000000,
+            maxAge:86400000,
         })
         res.status(200).json({userId:user._id})
     } catch (error) {

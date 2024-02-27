@@ -32,12 +32,12 @@ router.post('/register',[
         await user.save()
 
         const token = jwt.sign({userId:user.id},process.env.JWT_SECRET_KEY as string,{
-            expiresIn:"10d"
+            expiresIn:"1d"
         })
         res.cookie("auth_token",token,{
             httpOnly:true,
             secure:process.env.NODE_ENV === "production",
-            maxAge:864000000,
+            maxAge:86400000,
         })
 
         return res.status(200).json({message:"Usuário registrado"})
