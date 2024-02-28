@@ -15,15 +15,15 @@ test.beforeEach(async ({page}) => {
   
     await page.getByRole("button",{name:"Entrar"}).click()
   
-    await expect(page.getByText("Bem Vindo")).toBeVisible()
+    await expect(page.getByText("Bem vindo!")).toBeVisible()
   
     
 })
 
 test("should allow to add a hotel",async ({page}) => {
     await page.goto(`${UI_Url}add-hotel`)
-    await page.locator('[name="name"]').fill("teste hotel")
-    await page.locator('[name="city"]').fill("teste cidade")
+    await page.locator('[name="name"]').fill("teste hotel 2")
+    await page.locator('[name="city"]').fill("teste cidade 2")
     await page.locator('[name="country"]').fill("Brasil")
     await page.locator('[name="description"]').fill("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec urna vitae arcu sodales vehicula. Integer in ligula non dolor convallis tincidunt. Vivamus vel justo vel leo fermentum faucibus. Phasellus ac nulla ut justo commodo dignissim. Sed sit amet risus odio. Integer nec enim ut metus malesuada tincidunt. Vivamus ultricies, risus nec cursus malesuada, metus justo tincidunt elit, sed tristique justo lorem nec lacus. Cras molestie hendrerit neque, vel efficitur risus varius eget. Sed et ante ac magna vulputate iaculis eu nec lacus. Ut vitae arcu vitae est volutpat aliquet eget nec lectus. Sed sit amet luctus purus. Sed consequat, lorem vel fermentum commodo, libero mi luctus dolor, nec tempus velit risus et neque. Nunc at urna vel nibh placerat pulvinar. Suspendisse potenti. Sed nec tortor vehicula, hendrerit velit ac, efficitur metus.")
     await page.locator('[name="pricePerNight"]').fill("200")
@@ -45,5 +45,23 @@ test("should allow to add a hotel",async ({page}) => {
     await expect(page.getByText("Hotel criado com sucesso")).toBeVisible()
 
 
+
+})
+
+test("should display hotels",async ({page}) => {
+    await page.goto(`${UI_Url}my-hotels`);
+    await expect(page.getByText("teste hotel")).toBeVisible()
+
+    await expect(page.getByText("Lorem ipsum dolor sit amet")).toBeVisible()
+
+    await expect(page.getByText("teste cidade, Brasil")).toBeVisible()
+    await expect(page.getByText("Cabana")).toBeVisible()
+    await expect(page.getByText("R$200 diária")).toBeVisible()
+    await expect(page.getByText("2 Adultos ,1 Criança")).toBeVisible()
+    await expect(page.getByText("3 Estrelas")).toBeVisible()
+
+    await expect(page.getByRole("link",{name:"Mais detalhes"})).toBeVisible()
+
+    await expect(page.getByRole("link",{name:"Adicionar Hotel"})).toBeVisible()
 
 })
