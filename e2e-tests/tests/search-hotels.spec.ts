@@ -71,7 +71,12 @@ test("Should book hotel",async ({page}) => {
 
     await page.getByRole("button",{name:"Confirmar reserva"}).click()
 
-    await expect(page.getByAltText("Reserva feita com sucesso!")).toBeVisible()
+    await expect(page.getByText("Reserva feita com sucesso!")).toBeVisible()
+
+    await page.getByRole("link",{name:"Minhas Reservas"}).click()
+
+    await expect(page.getByText("Teste hotel 5")).toBeVisible()
 
 
 })
+
