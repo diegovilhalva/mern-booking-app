@@ -12,6 +12,7 @@ const router = express.Router()
 
 
 
+
 router.get("/search", async (req: Request, res: Response) => {
   try {
     const query = constructSearchQuery(req.query);
@@ -51,6 +52,16 @@ router.get("/search", async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: "Ocorreu um erro, tente novamente mais tarde" })
+  }
+})
+
+router.get("/",async(req:Request,res:Response) =>{
+  try {
+    const hotels = await Hotel.find().sort("-lastUpdated")
+    res.json(hotels)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({message:"Ocorreu um erro, tente novamente mais tarde"})
   }
 })
 
