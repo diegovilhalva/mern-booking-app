@@ -39,7 +39,7 @@ test("should allow user to register",async ({page}) => {
   await expect(page.getByText("Usuário registrado com sucesso")).toBeVisible()
 
   await expect(page.getByRole("link",{name:"Minhas viagens"})).toBeVisible()
-  await expect(page.getByRole("link",{name:"Meus Hoteis"})).toBeVisible()
+  await expect(page.getByRole("link",{name:"Minhas Reservas"})).toBeVisible()
   await expect(page.getByRole("button",{name:"Sair"})).toBeVisible()
 
 })
